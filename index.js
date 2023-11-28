@@ -6,15 +6,16 @@ const puppeteer = require('puppeteer');
 (async () => {
 
 
-  const browser = await puppeteer.launch();
-  // Create a new page
+  const browser = await puppeteer.launch({headless: false});  // Create a new page
   const page = await browser.newPage();
+  
   
   const urls = [
       'https://www.wix.com',
       'https://www.notion.so',
     'https://www.spareroom.co.uk',
     'https://www.gmail.com'
+
 
   ];
   
