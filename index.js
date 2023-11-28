@@ -11,10 +11,12 @@ const puppeteer = require('puppeteer');
   
   
   const urls = [
+      'https://www.squarespace.com',
       'https://www.wix.com',
       'https://www.notion.so',
     'https://www.spareroom.co.uk',
-    'https://www.gmail.com'
+    'https://www.gmail.com', 
+    
 
 
   ];
@@ -28,7 +30,30 @@ const puppeteer = require('puppeteer');
     await page.goto(url);
     // Perform your desired tasks
     // For example, take a screenshot and save it as facebook.png
+
+    // Click on the get started button here 
+    const  elements =  await page.evaluate(() => {
+      // Get all <a> elements in the document
+      const links = document.querySelectorAll('a');
+      // Filter the links that match the regex pattern
+      const regex = /get\sstarted/i;
+      const result = [];
+      for (let link of links) {
+        if (regex.test(link.textContent)) {
+          result.push(link);
+          console.log(link); 
+          console.log(result); 
+           result[0].click(); 
+          
+          
+        }
+      }
+      return result;
+    });
+    
     await page.screenshot({path: 'facebook.png'});
+    
+    
     // Increment the counter
     counter++;
     // If the counter reaches the end of the array, reset it to zero
